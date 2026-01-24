@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Metro Property Care</title>
     <!--
-      This is a simple static entry point for Metro Property Care.  When you migrate this into
+      This is a simple static entry point for Metro Property Care. When you migrate this into
       a framework (e.g. Next.js), break sections into components and import the
-      shared styles from style.css.  The splash animation is handled via script.js.
+      shared styles from style.css. The splash animation is handled via script.js.
     -->
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <!-- Splash overlay: displayed on initial load; hidden after user interaction -->
-    <div id="splash-overlay" class="splash-overlay">
+    <div id="splash-overlay" class="splash-overlay" aria-hidden="true">
       <img
         src="assets/logo.png"
         alt="Metro Property Care logo"
@@ -23,7 +23,7 @@
     </div>
 
     <!-- Sticky header with logo and navigation -->
-    <header class="site-header">
+    <header class="site-header" id="site-header">
       <div class="logo">
         <img
           src="assets/logo.png"
@@ -32,9 +32,12 @@
         />
       </div>
       <nav class="nav-links">
+        <a href="#hero">Home</a>
+        <a href="#fast-actions">Actions</a>
+        <a href="#categories">Categories</a>
         <a href="#about">About</a>
-        <a href="#catalog">Catalog</a>
-        <a href="#ordering">Ordering</a>
+        <a href="#ordering">Standards</a>
+        <a href="#faqs">FAQs</a>
         <a href="#contact">Contact</a>
       </nav>
     </header>
@@ -42,108 +45,212 @@
     <main>
       <!-- Hero section with calm imagery and product positioning -->
       <section id="hero" class="hero-section">
-        <div class="hero-content">
-          <h1>Detroit‑built craftsmanship.</h1>
-          <p>
-            Nationwide e‑commerce distribution for iron railings, gates, step rails and more.  Built
-            on Detroit’s blue‑collar standards: straight talk, tight tolerances and work that holds up.
+        <div class="hero-content fade-section">
+          <span class="eyebrow">Detroit-built iron craftsmanship</span>
+          <h1>Metro Property Care</h1>
+          <p class="hero-subtitle">
+            Detroit-built iron craftsmanship. Nationwide e-commerce distribution.
           </p>
-          <a href="#catalog" class="btn-primary">Shop Components</a>
+          <p class="hero-body">
+            Metro Property Care is the dedicated e-commerce and national distribution extension for
+            Icon Iron Rail—bringing proven fabrication quality from Detroit to contractors, builders,
+            and property professionals across the United States.
+          </p>
+          <p class="hero-support">
+            Built on Detroit’s blue-collar standards: straight talk, tight tolerances, and work that
+            holds up.
+          </p>
+          <div class="hero-actions">
+            <a href="#categories" class="btn-primary">Shop Components</a>
+            <a href="#contact" class="btn-secondary">Request Contractor / Bulk Pricing</a>
+          </div>
         </div>
       </section>
 
-      <!-- About section -->
+      <!-- Fast actions -->
+      <section id="fast-actions" class="content-section">
+        <div class="section-header fade-section">
+          <h2>Fast Actions</h2>
+          <p>
+            Direct paths for contractors, builders, and property teams who need reliable iron
+            components without delay.
+          </p>
+        </div>
+        <div class="cards-grid">
+          <article class="card fade-section">
+            <h3>Shop Components</h3>
+            <p>Browse iron parts, rail systems, and hardware for standard and custom jobs.</p>
+          </article>
+          <article class="card fade-section">
+            <h3>Request Contractor / Bulk Pricing</h3>
+            <p>Send quantities, timelines, and delivery destinations for tailored pricing.</p>
+          </article>
+          <article class="card fade-section">
+            <h3>Order Support</h3>
+            <p>Get assistance with measurements, compatibility, and lead-time planning.</p>
+          </article>
+          <article class="card fade-section">
+            <h3>Email</h3>
+            <p>
+              <a href="mailto:contact@metropropertycare.com">contact@metropropertycare.com</a>
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Product categories -->
+      <section id="categories" class="content-section surface-muted">
+        <div class="section-header fade-section">
+          <h2>Product Categories</h2>
+          <p>
+            A national catalog of iron components built from Detroit fabrication standards.
+          </p>
+        </div>
+        <div class="cards-grid">
+          <article class="card fade-section">
+            <h3>Wrought Iron Railings</h3>
+            <p>Residential and commercial railings with proven fit and finish.</p>
+          </article>
+          <article class="card fade-section">
+            <h3>Step Rails</h3>
+            <p>Standard-size step rails for common stair and porch applications.</p>
+          </article>
+          <article class="card fade-section">
+            <h3>Custom Gates</h3>
+            <p>Fabricated gate solutions for security, access, and curb appeal.</p>
+          </article>
+          <article class="card fade-section">
+            <h3>Iron Fencing &amp; Sections</h3>
+            <p>Fence panels, sections, and compatible components.</p>
+          </article>
+          <article class="card fade-section">
+            <h3>CNC Plasma Cutting / Fabricated Parts</h3>
+            <p>Custom-cut parts for builders, integrators, and metalwork projects.</p>
+          </article>
+          <article class="card fade-section">
+            <h3>Accessories &amp; Hardware</h3>
+            <p>Mounting kits, fasteners, post shoes, and install-ready add-ons.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- About / Partnership section -->
       <section id="about" class="content-section">
-        <h2>About Metro</h2>
-        <p>
-          <strong>Metro Property Care</strong> is the dedicated e‑commerce and national distribution
-          extension for Icon Iron Rail—bringing proven fabrication quality from Detroit to
-          contractors, builders and property professionals across the United States.
-        </p>
-        <p>
-          We operate as a third‑party subcontracted partner so that Icon Iron Rail can
-          focus on fabrication and local storefront transactions.  Metro extends access
-          to their product line beyond the local market.  We sell iron products and building
-          components by part through a streamlined online store, with reliable packaging,
-          shipping coordination, and contractor‑friendly ordering—so projects stay on
-          schedule.
-        </p>
+        <div class="section-header fade-section">
+          <h2>About / Partnership</h2>
+          <p>
+            Metro Property Care is the e-commerce and national distribution extension for Icon Iron
+            Rail, expanding fabrication excellence beyond the local market.
+          </p>
+        </div>
+        <div class="split-content">
+          <p class="fade-section">
+            We operate as a dedicated distribution partner so Icon Iron Rail can stay focused on
+            fabrication and local storefront relationships. Metro Property Care handles national
+            ordering, packaging, and shipping for contractors and property professionals who need
+            dependable ironwork shipped on schedule.
+          </p>
+          <p class="fade-section">
+            Every order follows Detroit shop discipline: clear communication, measured tolerances,
+            and accountability from quote to delivery. The goal is simple—iron components that arrive
+            ready to install and perform.
+          </p>
+        </div>
       </section>
 
-      <!-- Product catalog overview -->
-      <section id="catalog" class="content-section">
-        <h2>Product Catalog</h2>
-        <ul class="catalog-list">
-          <li>
-            <strong>Wrought Iron Railings</strong> — standard sizes and custom configurations for
-            homes and commercial properties.
-          </li>
-          <li>
-            <strong>Step Rails</strong> — standard‑size step rails designed for common stair and
-            porch applications; contractor‑ready.
-          </li>
-          <li>
-            <strong>Custom Gates</strong> — fabricated gates for security and curb appeal
-            (residential and commercial).
-          </li>
-          <li>
-            <strong>Iron Fencing &amp; Sections</strong> — fence panels/sections and compatible
-            components.
-          </li>
-          <li>
-            <strong>Custom Fabricated Parts</strong> — CNC plasma cutting and custom‑cut
-            components for builders, integrators and metalwork projects.
-          </li>
-          <li>
-            <strong>Accessories &amp; Hardware</strong> — mounting kits, fasteners, post shoes,
-            decorative caps and project add‑ons.
-          </li>
-        </ul>
+      <!-- Ordering & Shipping Standards -->
+      <section id="ordering" class="content-section surface-muted">
+        <div class="section-header fade-section">
+          <h2>Ordering &amp; Shipping Standards</h2>
+          <p>Systems that keep projects moving, built for contractors and builders.</p>
+        </div>
+        <div class="standards-grid">
+          <article class="card fade-section">
+            <h3>Simple checkout</h3>
+            <p>Order by part, by size, or by project grouping without extra friction.</p>
+          </article>
+          <article class="card fade-section">
+            <h3>Clear lead-times</h3>
+            <p>Standard items and custom fabrication timelines are always defined upfront.</p>
+          </article>
+          <article class="card fade-section">
+            <h3>Order confirmation discipline</h3>
+            <p>Every order is confirmed with measurements, quantities, and delivery details.</p>
+          </article>
+          <article class="card fade-section">
+            <h3>Nationwide shipping</h3>
+            <p>Residential, commercial, and jobsite delivery options across the U.S.</p>
+          </article>
+          <article class="card fade-section">
+            <h3>Packaging built for metal</h3>
+            <p>Protective packing engineered to safeguard metal finish and fit.</p>
+          </article>
+          <article class="card fade-section">
+            <h3>Fit + function first</h3>
+            <p>Every component is fabricated to install cleanly and perform reliably.</p>
+          </article>
+          <article class="card fade-section">
+            <h3>Finish &amp; hardware clarity</h3>
+            <p>Clear specs on coatings, hardware, and installation compatibility.</p>
+          </article>
+        </div>
       </section>
 
-      <!-- Ordering and shipping details -->
-      <section id="ordering" class="content-section">
-        <h2>Ordering &amp; Shipping</h2>
-        <ul>
-          <li><strong>Simple checkout:</strong> buy by part, by size or by project grouping.</li>
-          <li>
-            <strong>Clear lead‑times:</strong> standard items vs. custom fabrication clearly
-            labelled.
-          </li>
-          <li>
-            <strong>Nationwide shipping:</strong> residential, commercial and jobsite delivery
-            options.
-          </li>
-          <li>
-            <strong>Quality &amp; accountability:</strong> parts are sold with the intent that
-            they install cleanly and perform under real use.
-          </li>
-        </ul>
-        <p>
-          We stand behind what we ship—no silent substitutions—and prioritise clear
-          packaging, labelling and responsive support.
-        </p>
+      <!-- FAQs -->
+      <section id="faqs" class="content-section">
+        <div class="section-header fade-section">
+          <h2>FAQs</h2>
+          <p>Contractor guidance for quoting, lead-times, and fit questions.</p>
+        </div>
+        <div class="faq-list">
+          <article class="card fade-section">
+            <h3>How should contractors submit a bulk request?</h3>
+            <p>
+              Send quantities, dimensions, finish preferences, and ship-to ZIP codes to
+              <a href="mailto:contact@metropropertycare.com">contact@metropropertycare.com</a>.
+            </p>
+          </article>
+          <article class="card fade-section">
+            <h3>Can I confirm lead-times before ordering?</h3>
+            <p>
+              Yes. We provide clear lead-time guidance for standard vs. custom fabricated parts
+              before checkout or quote approval.
+            </p>
+          </article>
+          <article class="card fade-section">
+            <h3>Do you help validate measurements?</h3>
+            <p>
+              We review measurements and application details to ensure components arrive ready to
+              install.
+            </p>
+          </article>
+        </div>
       </section>
 
-      <!-- Contact & FAQs -->
-      <section id="contact" class="content-section">
-        <h2>Contact &amp; Quotes</h2>
-        <p>
-          If you need iron components that show up right and install clean, Metro Property Care
-          is built for your workflow.
-        </p>
-        <p>
-          To get started on your next project or request a quote, email us at
-          <a href="mailto:contact@metropropertycare.com">contact@metropropertycare.com</a>.  Provide
-          the product category (railing, gate, step rail, fencing, plasma‑cut part,
-          accessories), measurements, quantity, ship‑to ZIP, timeline and (if bulk) your
-          company name.  We’ll respond promptly with pricing and lead‑time information.
-        </p>
+      <!-- Contact section -->
+      <section id="contact" class="content-section surface-muted">
+        <div class="section-header fade-section">
+          <h2>Contact</h2>
+          <p>
+            For quoting, ordering, or support, reach us at
+            <a href="mailto:contact@metropropertycare.com">contact@metropropertycare.com</a>.
+          </p>
+        </div>
+        <div class="contact-card fade-section">
+          <p>
+            Provide the product category (railing, gate, step rail, fencing, plasma-cut part,
+            accessories), measurements, quantity, ship-to ZIP, timeline, and company name for bulk
+            requests. We respond with pricing, lead-times, and ordering guidance.
+          </p>
+        </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>© 2026 Metro Property Care.  All rights reserved.</p>
+      <p>© 2026 Metro Property Care. All rights reserved.</p>
+      <p class="footer-attribution">
+        <a href="https://feethedeveloper.com" target="_blank" rel="noopener">by Fee The Developer</a>
+      </p>
     </footer>
 
     <script src="script.js"></script>
