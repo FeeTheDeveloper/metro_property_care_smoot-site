@@ -1,0 +1,12 @@
+{
+  "name": "metro-property-care-smoot-site",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Static marketing site for Metro Property Care (Style 01).",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "echo \"Static site: no build step required.\""
+  }
+}

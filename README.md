@@ -22,6 +22,19 @@ This starter pack contains:
 4. The splash animation uses `sessionStorage` to ensure it only appears once per session.  To test repeatedly, open the site in a new private window or clear `sessionStorage` in your dev tools.
 5. To disable the splash, remove the `<div id="splash-overlay">` element and the associated JavaScript in `script.js`.
 
+## Deploy to Vercel
+
+This project is a static site with no build step required.
+
+- **Install:** `npm install`
+- **Build:** `npm run build`
+- **Output directory:** `.`
+
+### Notes
+
+- **Environment variables:** none required.
+- **Assets:** if you update or add binary assets (images, fonts), upload them directly to the repository outside of this PR workflow.
+
 ## Design Notes (Style 01)
 
 Style 01 is defined by **soft luxury, restraint, and editorial clarity**.  Colours are muted and neutral; contrast comes from spacing rather than saturation.  Typography is clean and modern with plenty of breathing room.  Movement is gentle and purposeful.  This aesthetic signals trust, quality and premium care — an ideal fit for a property maintenance brand.
