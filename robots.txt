@@ -1,0 +1,4 @@
+# TODO: Replace the placeholder domain with the live domain when available.
+User-agent: *
+Allow: /
+Sitemap: https://metropropertycare.com/sitemap.xml
