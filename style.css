@@ -274,15 +274,13 @@ section {
 
 /* Hero section */
 .hero-section {
-  /* WARNING: assets/flat-lay.jpg and assets/background.png are missing; SVG fallback will be used. */
   min-height: 82vh;
   background-image: linear-gradient(
       rgba(247, 247, 245, 0.92),
       rgba(247, 247, 245, 0.92)
     ),
-    url("assets/flat-lay.jpg"),
-    url("assets/background.png"),
-    url("assets/background.svg");
+    url("assets/background.png");
+  /* Optional alternate background: url("assets/flat-lay.jpg"); */
   background-size: cover;
   background-position: center;
   display: flex;
