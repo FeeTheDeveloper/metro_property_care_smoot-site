@@ -33,10 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
     hideSplash();
   }
 
-  if (prefersReducedMotion) {
-    hideSplash();
-  }
-
   const dismissEvents = [
     'click',
     'scroll',
@@ -59,14 +55,18 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', handleScroll, { passive: true });
   handleScroll();
 
-  const revealElements = document.querySelectorAll('.fade-section');
-  if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+  const revealKey = 'mpc_reveal_seen';
+  const revealElements = document.querySelectorAll('.reveal-heading, .reveal-fade');
+  const revealAlreadySeen = sessionStorage.getItem(revealKey);
+
+  if (!prefersReducedMotion && !revealAlreadySeen && 'IntersectionObserver' in window) {
     const observer = new IntersectionObserver(
       (entries, currentObserver) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('is-visible');
             currentObserver.unobserve(entry.target);
+            sessionStorage.setItem(revealKey, 'true');
           }
         });
       },
@@ -76,6 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     revealElements.forEach((element) => observer.observe(element));
   } else {
     revealElements.forEach((element) => element.classList.add('is-visible'));
+    sessionStorage.setItem(revealKey, 'true');
   }
 
   const bulkForm = document.getElementById('bulk-pricing-form');
