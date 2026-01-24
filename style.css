@@ -70,8 +70,19 @@ section {
   justify-content: center;
   z-index: 50;
   opacity: 1;
-  transition: opacity var(--motion-fast) var(--motion-ease);
+  transition: opacity 280ms var(--motion-ease);
   pointer-events: none;
+  overflow: hidden;
+}
+
+.splash-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.12) 55%, rgba(0, 0, 0, 0.4) 100%);
+  opacity: 1;
+  transition: opacity 280ms var(--motion-ease);
+  z-index: 0;
 }
 
 .splash-overlay.hidden {
@@ -79,20 +90,34 @@ section {
   pointer-events: none;
 }
 
+.splash-overlay.hidden::before {
+  opacity: 0;
+}
+
+.splash-overlay.hidden .splash-logo {
+  animation: none;
+}
+
 .splash-logo {
-  max-width: 70%;
-  width: 320px;
-  animation: splash-in var(--motion-slow) var(--motion-ease) forwards;
+  width: min(85vw, 1100px);
+  max-height: 75vh;
+  height: auto;
+  animation: splash-in 1000ms var(--motion-ease) forwards;
+  position: relative;
+  z-index: 1;
+  will-change: opacity, transform, filter;
 }
 
 @keyframes splash-in {
   from {
     opacity: 0;
-    transform: scale(0.96);
+    transform: scale(0.95);
+    filter: blur(10px);
   }
   to {
     opacity: 1;
     transform: scale(1);
+    filter: blur(0);
   }
 }
 
@@ -719,6 +744,10 @@ section {
   .form-footer {
     align-items: flex-start;
   }
+
+  .splash-logo {
+    width: 92vw;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -728,6 +757,8 @@ section {
 
   .splash-logo {
     animation-name: splash-fade;
+    filter: none;
+    transform: none;
   }
 
   .reveal-heading {
