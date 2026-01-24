@@ -4,6 +4,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   const splash = document.getElementById('splash-overlay');
   const header = document.querySelector('.site-header');
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const urlParams = new URLSearchParams(window.location.search);
   const introOverride = urlParams.get('intro');
@@ -55,6 +57,20 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', handleScroll, { passive: true });
   handleScroll();
 
+  if (navToggle && navLinks && header) {
+    navToggle.addEventListener('click', () => {
+      const isOpen = header.classList.toggle('nav-open');
+      navToggle.setAttribute('aria-expanded', `${isOpen}`);
+    });
+
+    navLinks.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        header.classList.remove('nav-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
   const revealKey = 'mpc_reveal_seen';
   const revealElements = document.querySelectorAll('.reveal-heading, .reveal-fade');
   const revealAlreadySeen = sessionStorage.getItem(revealKey);
@@ -79,22 +95,14 @@ document.addEventListener('DOMContentLoaded', () => {
     sessionStorage.setItem(revealKey, 'true');
   }
 
-  const bulkForm = document.getElementById('bulk-pricing-form');
-  if (bulkForm) {
-    bulkForm.addEventListener('submit', (event) => {
-      event.preventDefault();
-      const data = new FormData(bulkForm);
-      const fields = [
-        { key: 'name', label: 'Name' },
-        { key: 'company', label: 'Company' },
-        { key: 'email', label: 'Email' },
-        { key: 'phone', label: 'Phone' },
-        { key: 'category', label: 'Product category' },
-        { key: 'zip', label: 'Ship-to ZIP' },
-        { key: 'notes', label: 'Measurements / Notes' },
-        { key: 'timeline', label: 'Timeline' },
-      ];
+  const handleMailtoForm = (form, subject, fields) => {
+    if (!form) {
+      return;
+    }
 
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
       const body = fields
         .map(({ key, label }) => {
           const value = `${data.get(key) || ''}`.trim();
@@ -102,12 +110,30 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .join('\n');
 
-      const subject = 'Contractor / Bulk Quote Request';
       const mailto = `mailto:contact@metropropertycare.com?subject=${encodeURIComponent(
         subject
       )}&body=${encodeURIComponent(body)}`;
 
       window.location.href = mailto;
     });
-  }
+  };
+
+  handleMailtoForm(document.getElementById('bulk-pricing-form'), 'Contractor / Bulk Pricing Request', [
+    { key: 'name', label: 'Name' },
+    { key: 'company', label: 'Company' },
+    { key: 'email', label: 'Email' },
+    { key: 'phone', label: 'Phone' },
+    { key: 'category', label: 'Product category' },
+    { key: 'zip', label: 'Ship-to ZIP' },
+    { key: 'notes', label: 'Measurements / Notes' },
+    { key: 'timeline', label: 'Timeline' },
+  ]);
+
+  handleMailtoForm(document.getElementById('contact-form'), 'General Inquiry', [
+    { key: 'name', label: 'Name' },
+    { key: 'email', label: 'Email' },
+    { key: 'company', label: 'Company' },
+    { key: 'category', label: 'Product category' },
+    { key: 'notes', label: 'Notes' },
+  ]);
 });
