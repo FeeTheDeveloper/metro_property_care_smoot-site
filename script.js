@@ -77,4 +77,36 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     revealElements.forEach((element) => element.classList.add('is-visible'));
   }
+
+  const bulkForm = document.getElementById('bulk-pricing-form');
+  if (bulkForm) {
+    bulkForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const data = new FormData(bulkForm);
+      const fields = [
+        { key: 'name', label: 'Name' },
+        { key: 'company', label: 'Company' },
+        { key: 'email', label: 'Email' },
+        { key: 'phone', label: 'Phone' },
+        { key: 'category', label: 'Product category' },
+        { key: 'zip', label: 'Ship-to ZIP' },
+        { key: 'notes', label: 'Measurements / Notes' },
+        { key: 'timeline', label: 'Timeline' },
+      ];
+
+      const body = fields
+        .map(({ key, label }) => {
+          const value = `${data.get(key) || ''}`.trim();
+          return `${label}: ${value || '—'}`;
+        })
+        .join('\n');
+
+      const subject = 'Contractor / Bulk Quote Request';
+      const mailto = `mailto:contact@metropropertycare.com?subject=${encodeURIComponent(
+        subject
+      )}&body=${encodeURIComponent(body)}`;
+
+      window.location.href = mailto;
+    });
+  }
 });

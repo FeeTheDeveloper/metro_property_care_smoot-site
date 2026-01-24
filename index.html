@@ -35,7 +35,8 @@
       <nav class="nav-links">
         <a href="#hero">Home</a>
         <a href="#fast-actions">Actions</a>
-        <a href="#categories">Categories</a>
+        <a href="#shop">Categories</a>
+        <a href="#bulk-pricing">Bulk Pricing</a>
         <a href="#about">About</a>
         <a href="#ordering">Standards</a>
         <a href="#faqs">FAQs</a>
@@ -62,9 +63,15 @@
             holds up.
           </p>
           <div class="hero-actions">
-            <a href="#categories" class="btn-primary">Shop Components</a>
-            <a href="#contact" class="btn-secondary">Request Contractor / Bulk Pricing</a>
+            <a href="#bulk-pricing" class="button-primary">Request Contractor / Bulk Pricing</a>
+            <a href="#shop" class="button-secondary">Shop Components</a>
           </div>
+          <p class="hero-helper">
+            Email support:
+            <a class="link-cta" href="mailto:contact@metropropertycare.com"
+              >contact@metropropertycare.com</a
+            >
+          </p>
         </div>
       </section>
 
@@ -78,29 +85,27 @@
           </p>
         </div>
         <div class="cards-grid">
-          <article class="card fade-section">
+          <a class="card card-link fade-section" href="#shop">
             <h3>Shop Components</h3>
             <p>Browse iron parts, rail systems, and hardware for standard and custom jobs.</p>
-          </article>
-          <article class="card fade-section">
+          </a>
+          <a class="card card-link fade-section" href="#bulk-pricing">
             <h3>Request Contractor / Bulk Pricing</h3>
-            <p>Send quantities, timelines, and delivery destinations for tailored pricing.</p>
-          </article>
-          <article class="card fade-section">
+            <p>Share quantities, timelines, and delivery destinations for tailored pricing.</p>
+          </a>
+          <a class="card card-link fade-section" href="#order-support">
             <h3>Order Support</h3>
-            <p>Get assistance with measurements, compatibility, and lead-time planning.</p>
-          </article>
-          <article class="card fade-section">
-            <h3>Email</h3>
-            <p>
-              <a href="mailto:contact@metropropertycare.com">contact@metropropertycare.com</a>
-            </p>
-          </article>
+            <p>Get help with measurements, compatibility, and lead-time coordination.</p>
+          </a>
+          <a class="card card-link fade-section" href="#contact">
+            <h3>Contact</h3>
+            <p>Reach the Metro Property Care team for quotes or support follow-ups.</p>
+          </a>
         </div>
       </section>
 
       <!-- Product categories -->
-      <section id="categories" class="content-section surface-muted">
+      <section id="shop" class="content-section surface-muted">
         <div class="section-header fade-section">
           <h2>Product Categories</h2>
           <p>
@@ -133,6 +138,66 @@
             <p>Mounting kits, fasteners, post shoes, and install-ready add-ons.</p>
           </article>
         </div>
+      </section>
+
+      <section id="bulk-pricing" class="content-section">
+        <div class="section-header fade-section">
+          <h2>Request Contractor / Bulk Pricing</h2>
+          <p>
+            Send your quantities and schedules for bulk quotes, takeoff assistance, and
+            multi-location delivery planning.
+          </p>
+        </div>
+        <form id="bulk-pricing-form" class="quote-form fade-section" action="mailto:contact@metropropertycare.com">
+          <div class="form-grid">
+            <label class="form-field">
+              <span>Name *</span>
+              <input type="text" name="name" required />
+            </label>
+            <label class="form-field">
+              <span>Company</span>
+              <input type="text" name="company" />
+            </label>
+            <label class="form-field">
+              <span>Email *</span>
+              <input type="email" name="email" required />
+            </label>
+            <label class="form-field">
+              <span>Phone</span>
+              <input type="tel" name="phone" />
+            </label>
+            <label class="form-field">
+              <span>Product category</span>
+              <select name="category">
+                <option value="Railings">Railings</option>
+                <option value="Step Rails">Step Rails</option>
+                <option value="Gates">Gates</option>
+                <option value="Fencing">Fencing</option>
+                <option value="Fabricated Parts">Fabricated Parts</option>
+                <option value="Accessories">Accessories</option>
+              </select>
+            </label>
+            <label class="form-field">
+              <span>Ship-to ZIP</span>
+              <input type="text" name="zip" />
+            </label>
+            <label class="form-field form-field-full">
+              <span>Measurements / Notes</span>
+              <textarea name="notes" rows="4"></textarea>
+            </label>
+            <label class="form-field">
+              <span>Timeline</span>
+              <select name="timeline">
+                <option value="Standard">Standard</option>
+                <option value="Needed-by date">Needed-by date</option>
+              </select>
+            </label>
+          </div>
+          <div class="form-footer">
+            <button type="submit" class="button-primary">Send Request</button>
+            <p class="privacy-text">We’ll only use this to respond to your request.</p>
+          </div>
+        </form>
       </section>
 
       <!-- About / Partnership section -->
@@ -197,6 +262,38 @@
         </div>
       </section>
 
+      <section id="order-support" class="content-section support-band">
+        <div class="support-inner fade-section">
+          <div>
+            <h2>Order Support</h2>
+            <p>Quick guidance for sizing, delivery timing, and project coordination.</p>
+          </div>
+          <div class="support-actions">
+            <a
+              class="button-secondary"
+              href="mailto:contact@metropropertycare.com?subject=Sizing%20%2F%20Fit%20Check"
+              >Fit &amp; Sizing Help</a
+            >
+            <a
+              class="button-secondary"
+              href="mailto:contact@metropropertycare.com?subject=Lead%20Time%20%2F%20Delivery%20Coordination"
+              >Lead Time &amp; Delivery</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section trust-strip">
+        <div class="trust-inner fade-section">
+          <span class="trust-title">Built on Detroit standards</span>
+          <div class="trust-points">
+            <span>Accurate specs &amp; honest lead-times</span>
+            <span>Packaging built for metal</span>
+            <span>Contractor-friendly support</span>
+          </div>
+        </div>
+      </section>
+
       <!-- FAQs -->
       <section id="faqs" class="content-section">
         <div class="section-header fade-section">
@@ -249,6 +346,12 @@
 
     <footer class="site-footer">
       <p>© 2026 Metro Property Care. All rights reserved.</p>
+      <div class="footer-links">
+        <a class="link-cta" href="mailto:contact@metropropertycare.com"
+          >contact@metropropertycare.com</a
+        >
+        <a class="link-cta" href="#bulk-pricing">Request Bulk Pricing</a>
+      </div>
       <p class="footer-attribution">
         <a href="https://feethedeveloper.com" target="_blank" rel="noopener">by Fee The Developer</a>
       </p>
