@@ -21,7 +21,10 @@
   --header-height: 64px;
   --max-width: 1120px;
   --section-padding: 96px;
-  --transition-base: 220ms ease;
+  --motion-fast: 150ms;
+  --motion-base: 240ms;
+  --motion-slow: 460ms;
+  --motion-ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 * {
@@ -67,7 +70,7 @@ section {
   justify-content: center;
   z-index: 9999;
   opacity: 1;
-  transition: opacity 0.6s ease;
+  transition: opacity var(--motion-fast) var(--motion-ease);
 }
 
 .splash-overlay.hidden {
@@ -78,7 +81,7 @@ section {
 .splash-logo {
   max-width: 70%;
   width: 320px;
-  animation: splash-in 1.2s ease forwards;
+  animation: splash-in var(--motion-slow) var(--motion-ease) forwards;
 }
 
 @keyframes splash-in {
@@ -103,14 +106,22 @@ section {
   align-items: center;
   padding: 0 2.5rem;
   background-color: transparent;
-  transition: background-color var(--transition-base), box-shadow var(--transition-base);
+  isolation: isolate;
   z-index: 100;
 }
 
-.site-header.scrolled {
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
   background-color: rgba(247, 247, 245, 0.92);
-  backdrop-filter: blur(8px);
-  box-shadow: 0 8px 24px rgba(11, 13, 16, 0.06);
+  opacity: 0;
+  transition: background-color var(--motion-base) var(--motion-ease), opacity var(--motion-base) var(--motion-ease);
+  z-index: -1;
+}
+
+.site-header.scrolled::before {
+  opacity: 1;
 }
 
 .logo img {
@@ -128,7 +139,7 @@ section {
 .nav-links a {
   text-decoration: none;
   font-weight: 500;
-  transition: color var(--transition-base);
+  transition: color var(--motion-fast) var(--motion-ease);
 }
 
 .nav-links a:hover {
@@ -211,8 +222,9 @@ section {
   font-weight: 500;
   text-decoration: none;
   border: 1px solid transparent;
-  transition: background-color var(--transition-base), color var(--transition-base),
-    border-color var(--transition-base);
+  transition: background-color var(--motion-fast) var(--motion-ease), color var(--motion-fast) var(--motion-ease),
+    border-color var(--motion-fast) var(--motion-ease), opacity var(--motion-fast) var(--motion-ease),
+    transform var(--motion-fast) var(--motion-ease);
 }
 
 .button-primary {
@@ -221,7 +233,12 @@ section {
 }
 
 .button-primary:hover {
-  background-color: #5a677c;
+  opacity: 0.92;
+}
+
+.button-primary:active,
+.button-secondary:active {
+  transform: translateY(1px);
 }
 
 .button-secondary {
@@ -237,7 +254,7 @@ section {
 .link-cta {
   text-decoration: none;
   border-bottom: 1px solid transparent;
-  transition: border-color var(--transition-base);
+  transition: border-color var(--motion-fast) var(--motion-ease), color var(--motion-fast) var(--motion-ease);
 }
 
 .link-cta:hover {
@@ -296,12 +313,11 @@ section {
 .card-link {
   text-decoration: none;
   color: inherit;
-  transition: border-color var(--transition-base), transform var(--transition-base);
+  transition: border-color var(--motion-base) var(--motion-ease);
 }
 
 .card-link:hover {
   border-color: rgba(11, 13, 16, 0.2);
-  transform: translateY(-2px);
 }
 
 .card h3 {
@@ -367,6 +383,14 @@ section {
   font-size: 0.95rem;
   font-family: inherit;
   background-color: #ffffff;
+  transition: border-color var(--motion-fast) var(--motion-ease);
+  outline: none;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-color: rgba(102, 116, 138, 0.6);
 }
 
 .form-field textarea {
@@ -482,14 +506,23 @@ section {
 }
 
 /* Reveal animations */
-.fade-section {
+.reveal-heading {
   opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 500ms ease, transform 500ms ease;
+  transform: translateY(8px);
+  transition: opacity var(--motion-slow) var(--motion-ease), transform var(--motion-slow) var(--motion-ease);
 }
 
-.fade-section.is-visible {
+.reveal-fade {
+  opacity: 0;
+  transition: opacity var(--motion-base) var(--motion-ease);
+}
+
+.reveal-heading.is-visible,
+.reveal-fade.is-visible {
   opacity: 1;
+}
+
+.reveal-heading.is-visible {
   transform: translateY(0);
 }
 
@@ -546,11 +579,25 @@ section {
   }
 
   .splash-logo {
-    animation: none;
+    animation-name: splash-fade;
   }
 
-  .fade-section {
-    opacity: 1;
+  .reveal-heading {
     transform: none;
+    transition: opacity var(--motion-slow) var(--motion-ease);
+  }
+
+  .button-primary:active,
+  .button-secondary:active {
+    transform: none;
+  }
+}
+
+@keyframes splash-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
