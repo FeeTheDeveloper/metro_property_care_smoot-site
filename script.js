@@ -129,6 +129,17 @@ document.addEventListener('DOMContentLoaded', () => {
     { key: 'timeline', label: 'Timeline' },
   ]);
 
+  handleMailtoForm(document.getElementById('quote-form'), 'Quote Request', [
+    { key: 'name', label: 'Name' },
+    { key: 'company', label: 'Company' },
+    { key: 'email', label: 'Email' },
+    { key: 'phone', label: 'Phone' },
+    { key: 'category', label: 'Product category' },
+    { key: 'zip', label: 'Ship-to / Install ZIP' },
+    { key: 'notes', label: 'Project Details / Measurements' },
+    { key: 'timeline', label: 'Timeline' },
+  ]);
+
   handleMailtoForm(document.getElementById('contact-form'), 'General Inquiry', [
     { key: 'name', label: 'Name' },
     { key: 'email', label: 'Email' },
@@ -136,4 +147,15 @@ document.addEventListener('DOMContentLoaded', () => {
     { key: 'category', label: 'Product category' },
     { key: 'notes', label: 'Notes' },
   ]);
+
+  // Smooth scroll for any anchor link pointing to #request-quote (header CTA, footer link, etc.)
+  document.querySelectorAll('a[href="#request-quote"]').forEach((anchor) => {
+    anchor.addEventListener('click', (e) => {
+      const target = document.getElementById('request-quote');
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
 });

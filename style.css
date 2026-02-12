@@ -1,13 +1,30 @@
 /*
   Global styles for Metro Property Care
 
-  This stylesheet embraces Style 01 — Soft Luxury Commerce. Colors are muted and
-  neutral, typography is clean and modern, and spacing is generous to evoke calm
-  confidence. Minor animations support the signature splash and subtle content reveals.
+  Sections:
+    1. Reset & Variables
+    2. Typography & Base
+    3. Splash Overlay
+    4. Header & Navigation
+    5. Hero Section (homepage redesign)
+    6. "What Do We Offer" Section
+    7. "Who Are We?" Section
+    8. Quote Form
+    9. Content Sections (shared)
+    10. Cards & Grids
+    11. Buttons & Links
+    12. Support / Trust Strips (subpages)
+    13. Footer
+    14. Reveal Animations & no-js Fallback
+    15. Subpage-specific (page-hero, tiles, categories)
+    16. Responsive
 */
 
-/* Import Inter font via Google Fonts if running standalone. */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap");
+/* ========================================================================
+   1. Reset & Variables
+   ======================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
 
 :root {
   color-scheme: light;
@@ -30,6 +47,10 @@
 * {
   box-sizing: border-box;
 }
+
+/* ========================================================================
+   2. Typography & Base
+   ======================================================================== */
 
 html, body {
   margin: 0;
@@ -57,7 +78,15 @@ section {
   scroll-margin-top: calc(var(--header-height) + 24px);
 }
 
-/* Splash overlay: covers the page on initial load; hidden after interaction */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ========================================================================
+   3. Splash Overlay
+   ======================================================================== */
+
 .splash-overlay {
   position: fixed;
   top: 0;
@@ -79,7 +108,7 @@ section {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.12) 55%, rgba(0, 0, 0, 0.4) 100%);
+  background: radial-gradient(circle at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.12) 55%, rgba(0,0,0,0.4) 100%);
   opacity: 1;
   transition: opacity 280ms var(--motion-ease);
   z-index: 0;
@@ -109,19 +138,14 @@ section {
 }
 
 @keyframes splash-in {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-    filter: blur(10px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-    filter: blur(0);
-  }
+  from { opacity: 0; transform: scale(0.95); filter: blur(10px); }
+  to   { opacity: 1; transform: scale(1);    filter: blur(0);    }
 }
 
-/* Header */
+/* ========================================================================
+   4. Header & Navigation
+   ======================================================================== */
+
 .site-header {
   position: fixed;
   top: 0;
@@ -142,7 +166,8 @@ section {
   inset: 0;
   background-color: rgba(247, 247, 245, 0.92);
   opacity: 0;
-  transition: background-color var(--motion-base) var(--motion-ease), opacity var(--motion-base) var(--motion-ease);
+  transition: background-color var(--motion-base) var(--motion-ease),
+              opacity var(--motion-base) var(--motion-ease);
   z-index: -1;
 }
 
@@ -170,6 +195,13 @@ section {
 
 .nav-links a:hover {
   color: var(--color-text-primary);
+}
+
+/* Header CTA button */
+.header-cta {
+  white-space: nowrap;
+  font-size: 0.9rem;
+  padding: 0.6rem 1.25rem;
 }
 
 .nav-toggle {
@@ -225,280 +257,180 @@ section {
   transform: rotate(-45deg);
 }
 
-.page-hero {
-  padding: calc(var(--section-padding) - 32px) 0 48px;
-}
+/* ========================================================================
+   5. Hero Section (homepage redesign)
+   ======================================================================== */
 
-.page-hero .section-header {
-  margin-bottom: 0;
-}
-
-.page-hero p {
-  max-width: 720px;
-}
-
-.page-hero h1 {
-  margin: 0 0 1rem;
-  font-size: 2.4rem;
-  font-weight: 600;
-}
-
-.tile-grid {
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-}
-
-.tile-link {
-  text-decoration: none;
-  height: 100%;
-  display: block;
-}
-
-.tile-link span {
-  color: var(--color-accent);
-  font-weight: 600;
-}
-
-.category-section {
-  border-bottom: 1px solid var(--color-border);
-  padding-bottom: 2.5rem;
-  margin-bottom: 2.5rem;
-}
-
-.category-section h2 {
-  margin: 0 0 0.75rem;
-  font-size: 1.6rem;
-}
-
-.category-section:last-child {
-  border-bottom: none;
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-
-.category-section .category-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 1rem;
-}
-
-.checklist {
-  margin: 1rem 0 0;
-  padding-left: 1.2rem;
-  color: var(--color-text-secondary);
-}
-
-.inline-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 1.5rem;
-}
-
-/* Hero section */
 .hero-section {
-  min-height: 82vh;
-  background-image: linear-gradient(
-      rgba(247, 247, 245, 0.92),
-      rgba(247, 247, 245, 0.92)
-    ),
-    url("assets/background.png");
-  /* Optional alternate background: url("assets/flat-lay.jpg"); */
-  background-size: cover;
-  background-position: center;
+  position: relative;
+  min-height: 85vh;
   display: flex;
   align-items: center;
-  padding: 0 2.5rem;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  background-image: url("assets/background.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(11, 13, 16, 0.55);
+  z-index: 1;
 }
 
 .hero-content {
-  max-width: 640px;
-  background-color: rgba(255, 255, 255, 0.82);
-  padding: 2.75rem;
-  border-radius: 12px;
-  border: 1px solid var(--color-border);
-  box-shadow: 0 18px 48px rgba(11, 13, 16, 0.08);
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  padding: 2rem;
 }
 
-.eyebrow {
-  display: inline-block;
-  font-size: 0.85rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-text-secondary);
-  margin-bottom: 1rem;
+.hero-headline {
+  margin: 0;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+  color: transparent;
+  -webkit-text-stroke: 2px #ffffff;
+  text-stroke: 2px #ffffff;
+  /* Fallback for browsers without text-stroke */
+  paint-order: stroke fill;
 }
 
-.hero-content h1 {
-  margin: 0 0 0.75rem;
-  font-size: 2.75rem;
-  font-weight: 600;
+/* Fallback for text-stroke: use a text-shadow outline */
+@supports not (-webkit-text-stroke: 1px #fff) {
+  .hero-headline {
+    color: transparent;
+    text-shadow:
+      -2px -2px 0 #fff,
+       2px -2px 0 #fff,
+      -2px  2px 0 #fff,
+       2px  2px 0 #fff;
+  }
+}
+
+.hero-divider {
+  width: 80px;
+  height: 3px;
+  background-color: #ffffff;
+  margin: 1.5rem auto;
 }
 
 .hero-subtitle {
-  margin: 0 0 1.5rem;
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: var(--color-text-primary);
-}
-
-.hero-body,
-.hero-support {
-  margin: 0 0 1.5rem;
-  color: var(--color-text-secondary);
-  font-size: 1rem;
-}
-
-.hero-support {
-  margin-bottom: 2rem;
-}
-
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.button-primary,
-.button-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.75rem 1.5rem;
-  border-radius: 999px;
-  font-weight: 500;
-  text-decoration: none;
-  border: 1px solid transparent;
-  transition: background-color var(--motion-fast) var(--motion-ease), color var(--motion-fast) var(--motion-ease),
-    border-color var(--motion-fast) var(--motion-ease), opacity var(--motion-fast) var(--motion-ease),
-    transform var(--motion-fast) var(--motion-ease);
-}
-
-.button-primary {
-  background-color: var(--color-accent);
+  margin: 0;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 400;
   color: #ffffff;
+  letter-spacing: 0.02em;
 }
 
-.button-primary:hover {
-  opacity: 0.92;
+/* ========================================================================
+   6. "What Do We Offer" Section
+   ======================================================================== */
+
+.offer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: var(--max-width);
 }
 
-.button-primary:active,
-.button-secondary:active {
-  transform: translateY(1px);
-}
-
-.button-secondary {
-  border-color: var(--color-border);
-  color: var(--color-text-primary);
-  background-color: #ffffff;
-}
-
-.button-secondary:hover {
-  border-color: rgba(11, 13, 16, 0.2);
-}
-
-.link-cta {
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: border-color var(--motion-fast) var(--motion-ease), color var(--motion-fast) var(--motion-ease);
-}
-
-.link-cta:hover {
-  border-bottom-color: currentColor;
-}
-
-.hero-helper {
-  margin: 1.5rem 0 0;
-  font-size: 0.95rem;
-  color: var(--color-text-secondary);
-}
-
-/* Content sections */
-.content-section {
-  padding: var(--section-padding) 2.5rem;
+.offer-card {
   background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(11, 13, 16, 0.04);
+  transition: transform var(--motion-base) var(--motion-ease),
+              box-shadow var(--motion-base) var(--motion-ease);
 }
 
-.surface-muted {
+.offer-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 48px rgba(11, 13, 16, 0.1);
+}
+
+.offer-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
   background-color: var(--color-surface-muted);
 }
 
-.section-header {
-  max-width: 720px;
-  margin-bottom: 3rem;
+.offer-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-.section-header h2 {
-  margin: 0 0 1rem;
-  font-size: 2.1rem;
+.offer-card h3 {
+  margin: 1rem 1.25rem 0.5rem;
+  font-size: 1.15rem;
   font-weight: 600;
 }
 
-.section-header p {
-  margin: 0;
+.offer-card p {
+  margin: 0 1.25rem 1.25rem;
   color: var(--color-text-secondary);
+  font-size: 0.95rem;
 }
 
-.cards-grid,
-.standards-grid,
-.faq-list {
+/* ========================================================================
+   7. "Who Are We?" Section
+   ======================================================================== */
+
+.about-split {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+  max-width: var(--max-width);
 }
 
-.card {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 12px;
-  padding: 1.5rem;
-  min-height: 160px;
-  box-shadow: 0 12px 32px rgba(11, 13, 16, 0.04);
-}
-
-.card-link {
-  text-decoration: none;
-  color: inherit;
-  transition: border-color var(--motion-base) var(--motion-ease);
-}
-
-.card-link:hover {
-  border-color: rgba(11, 13, 16, 0.2);
-}
-
-.card h3 {
-  margin: 0 0 0.75rem;
-  font-size: 1.15rem;
-}
-
-.card h2 {
-  margin: 0 0 0.75rem;
-  font-size: 1.25rem;
-}
-
-.card p {
-  margin: 0;
-  color: var(--color-text-secondary);
-}
-
-.split-content {
+.about-collage {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 2rem;
-  color: var(--color-text-secondary);
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 0.75rem;
 }
 
-.contact-card {
-  max-width: 680px;
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 12px;
-  padding: 1.75rem;
-  color: var(--color-text-secondary);
+.collage-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  background-color: var(--color-surface-muted);
+  display: block;
+  min-height: 140px;
 }
+
+.collage-img--tall {
+  grid-row: 1 / 3;
+}
+
+.about-copy {
+  padding-top: 0.5rem;
+}
+
+.about-copy p {
+  margin: 0 0 1.25rem;
+  color: var(--color-text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.about-copy p:last-child {
+  margin-bottom: 0;
+}
+
+/* ========================================================================
+   8. Quote Form
+   ======================================================================== */
 
 .quote-form {
   max-width: 840px;
@@ -569,6 +501,171 @@ section {
   font-size: 0.9rem;
 }
 
+/* ========================================================================
+   9. Content Sections (shared)
+   ======================================================================== */
+
+.content-section {
+  padding: var(--section-padding) 2.5rem;
+  background-color: var(--color-surface);
+}
+
+.surface-muted {
+  background-color: var(--color-surface-muted);
+}
+
+.section-header {
+  max-width: 720px;
+  margin-bottom: 3rem;
+}
+
+.section-header h2 {
+  margin: 0 0 1rem;
+  font-size: 2.1rem;
+  font-weight: 600;
+}
+
+.section-header p {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.inline-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.split-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  color: var(--color-text-secondary);
+}
+
+/* ========================================================================
+   10. Cards & Grids
+   ======================================================================== */
+
+.cards-grid,
+.standards-grid,
+.faq-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  min-height: 160px;
+  box-shadow: 0 12px 32px rgba(11, 13, 16, 0.04);
+}
+
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  transition: border-color var(--motion-base) var(--motion-ease);
+}
+
+.card-link:hover {
+  border-color: rgba(11, 13, 16, 0.2);
+}
+
+.card h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1.15rem;
+}
+
+.card h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.25rem;
+}
+
+.card p {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.contact-card {
+  max-width: 680px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 1.75rem;
+  color: var(--color-text-secondary);
+}
+
+/* ========================================================================
+   11. Buttons & Links
+   ======================================================================== */
+
+.button-primary,
+.button-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color var(--motion-fast) var(--motion-ease),
+              color var(--motion-fast) var(--motion-ease),
+              border-color var(--motion-fast) var(--motion-ease),
+              opacity var(--motion-fast) var(--motion-ease),
+              transform var(--motion-fast) var(--motion-ease);
+}
+
+.button-primary {
+  background-color: var(--color-accent);
+  color: #ffffff;
+}
+
+.button-primary:hover {
+  opacity: 0.92;
+}
+
+.button-primary:active,
+.button-secondary:active {
+  transform: translateY(1px);
+}
+
+.button-secondary {
+  border-color: var(--color-border);
+  color: var(--color-text-primary);
+  background-color: #ffffff;
+}
+
+.button-secondary:hover {
+  border-color: rgba(11, 13, 16, 0.2);
+}
+
+.link-cta {
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--motion-fast) var(--motion-ease),
+              color var(--motion-fast) var(--motion-ease);
+}
+
+.link-cta:hover {
+  border-bottom-color: currentColor;
+}
+
+.hero-helper {
+  margin: 1.5rem 0 0;
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+}
+
+/* ========================================================================
+   12. Support / Trust Strips (subpages)
+   ======================================================================== */
+
 .support-band {
   background-color: var(--color-surface);
 }
@@ -631,6 +728,10 @@ section {
   font-size: 0.95rem;
 }
 
+/* ========================================================================
+   13. Footer
+   ======================================================================== */
+
 .site-footer {
   text-align: center;
   padding: 2.5rem 2rem 2rem;
@@ -659,11 +760,15 @@ section {
   color: inherit;
 }
 
-/* Reveal animations */
+/* ========================================================================
+   14. Reveal Animations & no-js Fallback
+   ======================================================================== */
+
 .reveal-heading {
   opacity: 0;
   transform: translateY(8px);
-  transition: opacity var(--motion-slow) var(--motion-ease), transform var(--motion-slow) var(--motion-ease);
+  transition: opacity var(--motion-slow) var(--motion-ease),
+              transform var(--motion-slow) var(--motion-ease);
 }
 
 .reveal-fade {
@@ -679,6 +784,95 @@ section {
 .reveal-heading.is-visible {
   transform: translateY(0);
 }
+
+/* no-js fallback: when JS fails, content is immediately visible */
+.no-js .reveal-heading,
+.no-js .reveal-fade {
+  opacity: 1;
+  transform: none;
+}
+
+/* ========================================================================
+   15. Subpage-specific (page-hero, tiles, categories, checklist)
+   ======================================================================== */
+
+.page-hero {
+  padding: calc(var(--section-padding) - 32px) 0 48px;
+}
+
+.page-hero .section-header {
+  margin-bottom: 0;
+}
+
+.page-hero p {
+  max-width: 720px;
+}
+
+.page-hero h1 {
+  margin: 0 0 1rem;
+  font-size: 2.4rem;
+  font-weight: 600;
+}
+
+.tile-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.tile-link {
+  text-decoration: none;
+  height: 100%;
+  display: block;
+}
+
+.tile-link span {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.category-section {
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.category-section h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.6rem;
+}
+
+.category-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.category-section .category-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.checklist {
+  margin: 1rem 0 0;
+  padding-left: 1.2rem;
+  color: var(--color-text-secondary);
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  margin-bottom: 1rem;
+}
+
+/* ========================================================================
+   16. Responsive
+   ======================================================================== */
 
 @media (max-width: 900px) {
   :root {
@@ -712,16 +906,29 @@ section {
     display: inline-flex;
   }
 
+  /* Hide header CTA on mobile; it goes into mobile nav */
+  .header-cta {
+    display: none;
+  }
+
   .hero-section {
+    min-height: 70vh;
     padding: 0 1.5rem;
   }
 
-  .hero-content {
-    padding: 2rem;
+  .hero-headline {
+    font-size: clamp(2rem, 8vw, 3.2rem);
+    -webkit-text-stroke-width: 1.5px;
   }
 
-  .hero-content h1 {
-    font-size: 2.2rem;
+  .offer-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .about-split {
+    grid-template-columns: 1fr;
+    gap: 2rem;
   }
 
   .support-inner,
@@ -748,6 +955,14 @@ section {
   .splash-logo {
     width: 92vw;
   }
+
+  .about-collage {
+    grid-template-columns: 1fr;
+  }
+
+  .collage-img--tall {
+    grid-row: auto;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -773,10 +988,6 @@ section {
 }
 
 @keyframes splash-fade {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
